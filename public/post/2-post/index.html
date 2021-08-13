@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>聊聊linux top 命令 - Mental&#39;s world</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mental" /><meta name="description" content="工作中top命令还是挺常用到的，主要是用来看看系统的负载。但是对于里面的很多参数其实没有很清楚。这次做个总结。 top 界面 1 2 3 4 5 6 7 8 9 10 11 12" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.87.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/2-post/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="聊聊linux top 命令" />
+<meta property="og:description" content="工作中top命令还是挺常用到的，主要是用来看看系统的负载。但是对于里面的很多参数其实没有很清楚。这次做个总结。 top 界面 1 2 3 4 5 6 7 8 9 10 11 12" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/2-post/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-13T22:12:36+08:00" />
+<meta property="article:modified_time" content="2021-08-13T22:12:36+08:00" />
+
+<meta itemprop="name" content="聊聊linux top 命令">
+<meta itemprop="description" content="工作中top命令还是挺常用到的，主要是用来看看系统的负载。但是对于里面的很多参数其实没有很清楚。这次做个总结。 top 界面 1 2 3 4 5 6 7 8 9 10 11 12"><meta itemprop="datePublished" content="2021-08-13T22:12:36+08:00" />
+<meta itemprop="dateModified" content="2021-08-13T22:12:36+08:00" />
+<meta itemprop="wordCount" content="1845">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="聊聊linux top 命令"/>
+<meta name="twitter:description" content="工作中top命令还是挺常用到的，主要是用来看看系统的负载。但是对于里面的很多参数其实没有很清楚。这次做个总结。 top 界面 1 2 3 4 5 6 7 8 9 10 11 12"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Mental</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Mental</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">聊聊linux top 命令</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-08-13 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#top-界面">top 界面</a></li>
+            <li><a href="#load-average">load average</a></li>
+            <li><a href="#task">Task</a></li>
+            <li><a href="#cpu-states">CPU States</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>工作中top命令还是挺常用到的，主要是用来看看系统的负载。但是对于里面的很多参数其实没有很清楚。这次做个总结。</p>
+<h3 id="top-界面">top 界面</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">top - 22:18:39 up 19 min,  3 users,  load average: 0.00, 0.01, 0.00
+Tasks:  24 total,   1 running,  23 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem : 13048524 total, 11997596 free,   185760 used,   865168 buff/cache
+KiB Swap:  4194304 total,  4194304 free,        0 used. 12597892 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                           
+22141 mentalwz  20   0   42112   3536   3092 R   0.3  0.0   0:00.01 top                                                                               
+    1 root      20   0   77836   8900   6604 S   0.0  0.1   0:00.49 systemd
+   46 root      19  -1   94656  13188  12628 S   0.0  0.1   0:00.09 systemd-journal
+   52 root      20   0   42784   4120   2996 S   0.0  0.0   0:00.16 systemd-udevd
+   58 systemd+  20   0   71720   5064   4556 S   0.0  0.0   0:00.02 systemd-network
+  162 message+  20   0   50064   4440   3840 S   0.0  0.0   0:00.16 dbus-daemon
+  230 root      20   0   82140   4048   3488 S   0.0  0.0   0:00.00 login
+  463 root      20   0   70468   5916   5264 S   0.0  0.0   0:00.11 systemd-logind
+  504 mentalwz  20   0   76676   7640   6540 S   0.0  0.1   0:00.02 systemd
+  508 mentalwz  20   0  111452   2068     44 S   0.0  0.0   0:00.00 (sd-pam)
+  553 mentalwz  20   0   54132   6348   4452 S   0.0  0.0   0:00.05 zsh
+ 1345 root      20   0   72308   5672   4940 S   0.0  0.0   0:00.00 sshd
+</code></pre></td></tr></table>
+</div>
+</div><p>后面开始一个个参数介绍，结合man pages和google。</p>
+<h3 id="load-average">load average</h3>
+<p>第一行<code>load average: 0.00, 0.01, 0.00</code>
+有3个数字<code>0.00, 0.01, 0.00</code>, 分别代表最近1分钟，5分钟，15分钟的平均负载。问题是平均负载具体指啥呢？在man pages中uptime命令的描述有：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> System load averages is the average number of processes that are either in a runnable or uninterruptable state.  A process in a runnable  state  is  either using the CPU or waiting to use the CPU.  A process in uninterruptable state is waiting for some I/O access, eg waiting for disk.  The averages are taken over the three time intervals.  Load averages are not normalized for the number of CPUs in a system, so a load average of 1 means  a  single CPU system is loaded all the time while on a 4 CPU system it means it was idle 75% of the time.
+</code></pre></td></tr></table>
+</div>
+</div><p>system load averages 是处于可运行状态（runnable state）和不可打断状态（uninterruptable state）的进程数量。可运行状态的进程是正在使用cpu或等待cpu。处于不可打断状态的进程是在等待某些io获取，比如说磁盘。load averages 没有用所有cpu核心数去平均，所以 1 load averages表示一个单cpu系统处于满负载状态，而在4cpu的系统上则是75%的时间处于idle态。
+通俗地说，load averages可以理解为满载工作的cpu核心数。</p>
+<h3 id="task">Task</h3>
+<p>第二行：<code>Tasks:  24 total,   1 running,  23 sleeping,   0 stopped,   0 zombie</code>
+如果Task指的是运行的进程数量，分为4个状态<code>running sleeping stopped zombie</code>
+按<code>shift + h</code>，则会显示为线程如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Threads:  83 total,   1 running,  82 sleeping,   0 stopped,   0 zombie
+</code></pre></td></tr></table>
+</div>
+</div><p>另外关注下man-pages上的描述</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    This portion consists of a minimum of two lines.  In an SMP environment, additional lines can reflect individual CPU state percentages.
+
+    Line 1 shows total tasks or threads, depending on the state of the Threads-mode toggle.  That total is further classified as:
+        running; sleeping; stopped; zombie
+
+    Line 2 shows CPU state percentages based on the interval since the last refresh.        
+</code></pre></td></tr></table>
+</div>
+</div><p>SMP environment指的是啥？查了下wiki</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Symmetric multiprocessing or shared-memory multiprocessing[1] (SMP) involves a multiprocessor computer 
+hardware and software architecture where two or more identical processors are connected to a single, 
+shared main memory, have full access to all input and output devices, and are controlled by a single 
+operating system instance that treats all processors equally, reserving none for special purposes. Most 
+multiprocessor systems today use an SMP architecture. In the case of multi-core processors, the SMP 
+architecture applies to the cores, treating them as separate processors.
+</code></pre></td></tr></table>
+</div>
+</div><p>zh-wiki上比较好理解:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">对称多处理（英语：Symmetric multiprocessing，缩写为 SMP），也译为均衡多处理、
+对称性多重处理、对称多处理机[1]，是一种多处理器的电脑硬件架构，在对称多处理架构下，
+每个处理器的地位都是平等的，对资源的使用权限相同。现代多数的多处理器系统，都采用对
+称多处理架构，也被称为对称多处理系统（Symmetric multiprocessing system）。在这个
+系统中，拥有超过一个以上的处理器，这些处理器都连接到同一个共享的主存上，并由单一
+操作系统来控制。在多核心处理器的例子中，对称多处理架构，将每一个核心都当成是独立的处理器。
+
+在对称多处理系统上，在操作系统的支持下，无论行程是处于用户空间，或是核心空间，都可以分配到任何一个处理器上运行。因此，行程可以在不同的处理器间移动，达到负载平衡，使系统的效率提升。
+</code></pre></td></tr></table>
+</div>
+</div><p>另外google到了一些拓展：
+<a href="https://cloud.tencent.com/developer/article/1372348">服务器体系(SMP, NUMA, MPP)与共享存储器架构(UMA和NUMA)</a></p>
+<h3 id="cpu-states">CPU States</h3>
+<p>紧接着Task 下面的就是cpu states</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+</code></pre></td></tr></table>
+</div>
+</div><p>man上的说明也很详细：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">    us, user    : <span class="nb">time</span> running un-niced user processes       // 非niced的用户态进程占的cpu时间
+    sy, system  : <span class="nb">time</span> running kernel processes              // 内核态进程占的cpu时间
+    ni, nice    : <span class="nb">time</span> running niced user processes          // niced的用户态进程占的cpu时间
+    id, idle    : <span class="nb">time</span> spent in the kernel idle handler      // 内核挂起占用的cpu时间（即空闲）
+    wa, IO-wait : <span class="nb">time</span> waiting <span class="k">for</span> I/O completion            // 等待io完成占用的cpu时间
+    hi : <span class="nb">time</span> spent servicing hardware interrupts            // 软中断占用的cpu时间
+    si : <span class="nb">time</span> spent servicing software interrupts            // 硬中断占用的cpu时间
+    st : <span class="nb">time</span> stolen from this vm by the hypervisor          // ?
+</code></pre></td></tr></table>
+</div>
+</div><p>idle 有个解释很清楚<a href="https://unix.stackexchange.com/questions/361245/what-does-an-idle-cpu-process-do">what-does-an-idle-cpu-process-do</a><br>
+<code>st : time stolen from this vm by the hypervisor</code> 指的是啥？
+<a href="https://unix.stackexchange.com/questions/18918/linux-top-command-what-are-us-sy-ni-id-wa-hi-si-and-st-for-cpu-usage">一个解释</a>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&#34;steal time&#34;, is only relevant in virtualized environments. It represents time when the real CPU was not available to the current virtual machine — it was &#34;stolen&#34; from that VM by the hypervisor (either to run another VM, or for its own needs).
+</code></pre></td></tr></table>
+</div>
+</div><p>我的理解是只有当前系统是虚拟环境这个参数才有意义，表示的是真实cpu不可用占的百分比。即被hypervisor(虚拟机监视器)所偷走的cpu时间。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Mental</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-08-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/3-post-cs144/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">CS144 实验记录</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/first-post/">
+            <span class="next-text nav-default">弃用Gridea, 用Hugo重新开始</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Mental</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

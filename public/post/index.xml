@@ -6,7 +6,25 @@
     <description>Recent content in Posts on Mental&#39;s world</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 02 Jul 2021 21:53:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Aug 2021 00:10:52 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CS144 实验记录</title>
+      <link>http://localhost:1313/post/3-post-cs144/</link>
+      <pubDate>Sat, 14 Aug 2021 00:10:52 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/3-post-cs144/</guid>
+      <description>Lab0 1 2 3 4 5 mkdir build cd build CXX=&amp;#34;g++-8&amp;#34; CC=&amp;#34;gcc-8&amp;#34; cmake .. make -j8 make check_lab0</description>
+    </item>
+    
+    <item>
+      <title>聊聊linux top 命令</title>
+      <link>http://localhost:1313/post/2-post/</link>
+      <pubDate>Fri, 13 Aug 2021 22:12:36 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/2-post/</guid>
+      <description>工作中top命令还是挺常用到的，主要是用来看看系统的负载。但是对于里面的很多参数其实没有很清楚。这次做个总结。 top 界面 1 2 3 4 5 6 7 8 9 10 11 12</description>
+    </item>
+    
     <item>
       <title>弃用Gridea, 用Hugo重新开始</title>
       <link>http://localhost:1313/post/first-post/</link>
