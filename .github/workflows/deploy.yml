@@ -29,10 +29,6 @@ jobs:
       working-directory: ./blog
       run: pnpm run build
 
-    - name: Export Next.js project
-      working-directory: ./blog
-      run: pnpm run export
-
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
