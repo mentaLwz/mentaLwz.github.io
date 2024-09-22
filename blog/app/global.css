@@ -93,7 +93,7 @@ body {
 }
 
 .prose p {
-  @apply my-4 text-neutral-800 font-xiaowei dark:text-neutral-200;
+  @apply my-4 text-lg font-xiaowei dark:text-neutral-200;
 }
 
 .prose h1 {
