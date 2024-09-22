@@ -5,6 +5,18 @@
         <link>https://portfolio-blog-starter.vercel.app</link>
         <description>This is my portfolio RSS feed</description>
         <item>
+          <title>推特收藏管理</title>
+          <link>https://portfolio-blog-starter.vercel.app/blog/tweet-collection-manage</link>
+          <description>推特收藏管理</description>
+          <pubDate>Sun, 22 Sep 2024 00:00:00 GMT</pubDate>
+        </item>
+<item>
+          <title>更新记录 of all-about-tesla.com</title>
+          <link>https://portfolio-blog-starter.vercel.app/blog/all-about-testla</link>
+          <description>A update record of all-about-tesla.com</description>
+          <pubDate>Thu, 19 Sep 2024 00:00:00 GMT</pubDate>
+        </item>
+<item>
           <title>记录如何将blog部署到github.io上</title>
           <link>https://portfolio-blog-starter.vercel.app/blog/blog-record</link>
           <description>A pic of Pang</description>
