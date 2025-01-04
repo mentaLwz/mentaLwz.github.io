@@ -29,6 +29,12 @@
           <pubDate>Wed, 18 Sep 2024 00:00:00 GMT</pubDate>
         </item>
 <item>
+          <title>为何nextjs 不能fetch到api route</title>
+          <link>https://portfolio-blog-starter.vercel.app/blog/a-bug-in-nexjs-cloudflare</link>
+          <description>A record</description>
+          <pubDate>Tue, 09 Apr 2024 00:00:00 GMT</pubDate>
+        </item>
+<item>
           <title>重新再记录下</title>
           <link>https://portfolio-blog-starter.vercel.app/blog/vim</link>
           <description>A record</description>
