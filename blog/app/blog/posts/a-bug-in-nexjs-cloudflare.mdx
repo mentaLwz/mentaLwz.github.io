@@ -1,0 +1,63 @@
+---
+title: '为何nextjs 不能fetch到api route'
+publishedAt: '2024-04-09'
+summary: 'A record'
+---
+
+# 背景
+想做个导航网站部署到cloudflare， 但是发现nextjs 不能fetch到api route， 我用的是nextjs15, 根据cf上cloudflare的next on pages的文档创建的
+
+# 问题
+整个项目很简单，主页就是显示各个网站的信息，这些信息是在api route里面fetch数据获取的，数据库用的d1, 这部分没啥问题，本地跑npm run dev是正常的，但是跑npm run preview 或者部署到cf上就这个fetch就出问题了，代码大概如下
+```tyepscript
+export const runtime = 'edge';
+
+export default async function Home() {
+  try {
+    const response = await fetch(`/api/sites`, {
+      cache: 'no-store',
+    });
+
+        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <a
+            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+```
+问了ai但是不管用，我发现只有换成绝对的url 如（https://xxx.com/api/sites）才fetch 成功， 但我之前做过的另外个项目是可以直接fetch 的， 所以很奇怪。而且我用dev tools看发现也没有fetch的请求，感觉也挺奇怪，其实这也是一个伏笔。
+
+下楼倒了下垃圾，醒悟到应该是edge runtime的问题，因为我这个component是server component，所以不能直接fetch到api route， 所以需要用绝对路径。想到这里，我对server component和client 的认识更深了。回去赶紧试了下，改成client component，用useEffect包了下fetch，果然可以直接fetch到api endpoint了。上文说的伏笔就是，因为之前改成绝对路径能行，而且是server component的，所以fetch是在server端完成的，用户端就不会再fetch了。
+
+
+# 总结
+之前对nextjs 的server component和client component的理解不够深， 这次算是加深了理解。
+
+
+# English version
+
+# Background
+I wanted to create a navigation website deployed on Cloudflare, but discovered that NextJS couldn't fetch from API routes. I was using NextJS 15 and created the project following Cloudflare's Next on Pages documentation.
+
+# The Issue
+The project was quite simple - the homepage displays information about various websites, with the data being fetched from API routes using D1 as the database. This worked fine locally with `npm run dev`, but when running `npm run preview` or deploying to Cloudflare, the fetch requests failed. The code looked something like this:
+
+```typescript
+export const runtime = 'edge';
+
+export default async function Home() {
+  try {
+    const response = await fetch(`/api/sites`, {
+      cache: 'no-store',
+    });
+    // ... rest of the code
+```
+
+I tried asking AI for help but nothing worked. I discovered that it only succeeded when using absolute URLs (like `https://xxx.com/api/sites`). This was puzzling because I had another project where direct fetching worked fine. Additionally, I noticed there were no fetch requests showing up in the dev tools, which was another peculiar detail that would later prove significant.
+
+While taking out the trash, it hit me - this must be related to the edge runtime. Since this was a server component, it couldn't directly fetch from API routes, hence requiring absolute paths. This realization deepened my understanding of server and client components. When I got back, I tested this theory by converting it to a client component and wrapping the fetch in useEffect - and it worked! The earlier observation about missing network requests makes sense now: with absolute URLs in the server component, the fetch was happening server-side, so no client-side requests were needed.
+
+# Conclusion
+My previous understanding of NextJS server and client components wasn't complete. This experience has significantly improved my grasp of how they work.
+
