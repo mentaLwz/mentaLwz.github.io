@@ -5,6 +5,12 @@
         <link>https://portfolio-blog-starter.vercel.app</link>
         <description>This is my portfolio RSS feed</description>
         <item>
+          <title>为何nextjs 不能fetch到api route</title>
+          <link>https://portfolio-blog-starter.vercel.app/blog/a-bug-in-nexjs-cloudflare</link>
+          <description>Why NextJS Couldn't Fetch from API Routes</description>
+          <pubDate>Sat, 04 Jan 2025 00:00:00 GMT</pubDate>
+        </item>
+<item>
           <title>推特收藏管理</title>
           <link>https://portfolio-blog-starter.vercel.app/blog/tweet-collection-manage</link>
           <description>推特收藏管理</description>
@@ -27,12 +33,6 @@
           <link>https://portfolio-blog-starter.vercel.app/blog/pang</link>
           <description>A pic of Pang</description>
           <pubDate>Wed, 18 Sep 2024 00:00:00 GMT</pubDate>
-        </item>
-<item>
-          <title>为何nextjs 不能fetch到api route</title>
-          <link>https://portfolio-blog-starter.vercel.app/blog/a-bug-in-nexjs-cloudflare</link>
-          <description>A record</description>
-          <pubDate>Tue, 09 Apr 2024 00:00:00 GMT</pubDate>
         </item>
 <item>
           <title>重新再记录下</title>
