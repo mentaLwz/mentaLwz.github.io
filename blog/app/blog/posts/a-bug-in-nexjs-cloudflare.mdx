@@ -31,6 +31,8 @@ export default async function Home() {
 下楼倒了下垃圾，醒悟到应该是edge runtime的问题，因为我这个component是server component，所以不能直接fetch到api route， 所以需要用绝对路径。想到这里，我对server component和client 的认识更深了。回去赶紧试了下，改成client component，用useEffect包了下fetch，果然可以直接fetch到api endpoint了。上文说的伏笔就是，因为之前改成绝对路径能行，而且是server component的，所以fetch是在server端完成的，用户端就不会再fetch了。
 
 
+还有个注意的点就是有export const runtime = 'edge'的组件是server component， 这些组件是不能使用react hooks的，比如useState， useEffect等， 所以如果要用react hooks， 需要把export const runtime = 'edge'; 去掉， 这样就变成client component了。还有个比较坑的地方是，比如你在server component里面用了shadcn 的一些组件，比如button，这些组件是用用到react hooks的，所以你在server component里面用这些组件也会有问题。
+
 # 总结
 之前对nextjs 的server component和client component的理解不够深， 这次算是加深了理解。
 
@@ -59,6 +61,8 @@ export default async function Home() {
 I tried asking AI for help but nothing worked. I discovered that it only succeeded when using absolute URLs (like `https://xxx.com/api/sites`). This was puzzling because I had another project where direct fetching worked fine. Additionally, I noticed there were no fetch requests showing up in the dev tools, which was another peculiar detail that would later prove significant.
 
 While taking out the trash, it hit me - this must be related to the edge runtime. Since this was a server component, it couldn't directly fetch from API routes, hence requiring absolute paths. This realization deepened my understanding of server and client components. When I got back, I tested this theory by converting it to a client component and wrapping the fetch in useEffect - and it worked! The earlier observation about missing network requests makes sense now: with absolute URLs in the server component, the fetch was happening server-side, so no client-side requests were needed.
+
+Another important note is that components with `export const runtime = 'edge';` are server components, and these components cannot use React hooks like useState, useEffect, etc. So if you need to use React hooks, you need to remove `export const runtime = 'edge';`, which will turn it into a client component. There's also another tricky issue - if you use some shadcn components like buttons in a server component, these components use React hooks, so you'll run into problems using these components in server components as well.
 
 # Conclusion
 My previous understanding of NextJS server and client components wasn't complete. This experience has significantly improved my grasp of how they work.
